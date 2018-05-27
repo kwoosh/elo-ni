@@ -1,8 +1,8 @@
+// @flow
 import React, { Component } from 'react'
-
 import './Clock.css'
 
-class Clock extends Component {
+class Clock extends Component<{ seconds: number }> {
     render() {
         const degree = 360 / 60 * this.props.seconds
 
