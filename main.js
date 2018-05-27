@@ -1,18 +1,28 @@
 const { app, BrowserWindow } = require('electron')
-const { REACT_DEVELOPER_TOOLS, LOAD_URL } = require('./config')
+const path = require('path')
+const url = require('path')
 
-const isDevelopment = process.argv.slice(2).includes('--dev')
-process.env.NODE_ENV = isDevelopment ? 'development' : 'production'
+const isDev = process.env.NODE_ENV === 'development'
+const loadURL = isDev
+    ? 'http://localhost:3000'
+    : url.format({
+          pathname: path.join(__dirname, 'build/index.html'),
+          protocol: 'file:',
+          slashes: true,
+      })
 
 app.on('ready', () => {
     let mainWindow = new BrowserWindow()
 
-    mainWindow.loadURL(isDevelopment ? LOAD_URL.dev : LOAD_URL.build)
+    mainWindow.loadURL(loadURL)
 
     mainWindow.on('closed', () => {
         mainWindow = null
         app.quit()
     })
 
-    if (isDevelopment) BrowserWindow.addDevToolsExtension(REACT_DEVELOPER_TOOLS)
+    if (isDev) BrowserWindow.addDevToolsExtension(REACT_DEVELOPER_TOOLS_PATH)
 })
+
+const REACT_DEVELOPER_TOOLS_PATH =
+    'C:\\Users\\38050\\AppData\\Roaming\\Opera Software\\Opera Stable\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\3.2.1_0'
