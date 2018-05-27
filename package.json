@@ -4,21 +4,24 @@
   "private": true,
   "homepage": "./",
   "main": "./main.js",
+  "scripts": {
+    "dev": "react-scripts start",
+    "start": "cross-env NODE_ENV=development electron .",
+    "build:renderer": "react-scripts build",
+    "generate:icons": "electron-icon-maker --input=./public/assets/app-icon.png --output=./public/assets",
+    "test:renderer": "react-scripts test --env=jsdom"
+  },
   "dependencies": {
     "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-scripts": "1.1.4"
+    "react-dom": "^16.3.2"
   },
-  "scripts": {
-    "start": "electron . --dev",
-    "serve": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom"
+  "devDependencies": {
+    "electron": "^2.0.1",    
+    "cross-env": "^5.1.5",
+    "electron-icon-maker": "0.0.4",
+    "react-scripts": "1.1.4"
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "devDependencies": {
-    "electron": "^2.0.1"
   }
 }
