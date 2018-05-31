@@ -1,5 +1,13 @@
 body {
+    height: 100vh;
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    overflow: hidden;
+    background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+}
+
+.App {
+    height: inherit;
+    /* overflow: hidden; */
 }

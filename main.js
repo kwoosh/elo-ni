@@ -12,7 +12,10 @@ const loadURL = isDev
       })
 
 app.on('ready', () => {
-    let mainWindow = new BrowserWindow()
+    let mainWindow = new BrowserWindow({
+        width: 400,
+        height: 600,
+    })
 
     mainWindow.loadURL(loadURL)
 
@@ -25,4 +28,4 @@ app.on('ready', () => {
 })
 
 const REACT_DEVELOPER_TOOLS_PATH =
-    'C:\\Users\\38050\\AppData\\Roaming\\Opera Software\\Opera Stable\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\3.2.1_0'
+    'C:\\Users\\38050\\AppData\\Roaming\\Opera Software\\Opera Stable\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\3.2.3_0'

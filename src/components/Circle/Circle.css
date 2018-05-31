@@ -16,7 +16,6 @@
     z-index: 10;
     left: 50%;
     top: 50%;
-    transition: transform 1s linear;
 }
 
 .Circle__arrow-container {
@@ -26,7 +25,7 @@
     bottom: 0;
     left: 0;
 
-    transition: transform 1s linear;
+    transition: transform 0.1s linear;
 }
 
 .Circle__arrow {

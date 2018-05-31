@@ -38,7 +38,7 @@ class Stopwatch extends Component<{}, State> {
         this.setState({ milliseconds: 0 })
     }
 
-    formatTime = (millisecondsRaw: number) => {
+    getTime = (millisecondsRaw: number) => {
         const millisecondsModule = millisecondsRaw % 1000
         const totalSeconds = (millisecondsRaw - millisecondsModule) / 1000
 
@@ -50,9 +50,10 @@ class Stopwatch extends Component<{}, State> {
     }
 
     render() {
-        const { minutes, seconds, milliseconds } = this.formatTime(this.state.milliseconds)
+        const { minutes, seconds, milliseconds } = this.getTime(this.state.milliseconds)
+        const arrowDegree = 360 / 600 * ((seconds + minutes * 60) * 10 + milliseconds)
+
         const formatted = `${minutes}:${seconds}.${milliseconds}`
-        const arrowDegree = 360 / 60 * (seconds + minutes * 60)
 
         return (
             <div className="Stopwatch">

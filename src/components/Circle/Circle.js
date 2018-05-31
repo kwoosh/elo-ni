@@ -12,13 +12,8 @@ const Circle = ({ time, degree }: Props) => {
         <article className="Circle">
             <div className="Circle__arrow-container" style={{ transform: `rotateZ(${degree}deg)` }}>
                 <div className="Circle__arrow" />
-                <div
-                    className="Circle__center-text"
-                    style={{ transform: `translate(-50%, -50%) rotateZ(${-degree}deg)` }}
-                >
-                    {time}
-                </div>
             </div>
+            <div className="Circle__center-text">{time}</div>
         </article>
     )
 }
