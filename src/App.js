@@ -1,28 +1,12 @@
 // @flow
 import React, { Component } from 'react'
-import Clock from './components/Clock/Clock'
+import Stopwatch from './components/Stopwatch/Stopwatch'
 
-type State = {
-    seconds: number,
-}
-
-class App extends Component<{}, State> {
-    state = {
-        seconds: 0,
-    }
-
-    constructor(props: {}) {
-        super(props)
-
-        setInterval(() => {
-            this.setState(prev => ({ seconds: prev.seconds + 1 }))
-        }, 1000)
-    }
-
+class App extends Component<{}> {
     render() {
         return (
             <div className="App">
-                <Clock seconds={this.state.seconds} />
+                <Stopwatch />
             </div>
         )
     }
