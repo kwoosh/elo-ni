@@ -1,21 +1,14 @@
-// @flow
 import React, { Component } from 'react'
 import Circle from '../Circle/Circle'
 import Button from '../Button/Button'
 import './Stopwatch.css'
 
-type State = {
-    milliseconds: number,
-}
-
-class Stopwatch extends Component<{}, State> {
-    interval: null | IntervalID
-
+class Stopwatch extends Component {
     state = {
         milliseconds: 0,
     }
 
-    constructor(props: {}) {
+    constructor(props: Props) {
         super(props)
 
         this.interval = null
@@ -38,7 +31,13 @@ class Stopwatch extends Component<{}, State> {
         this.setState({ milliseconds: 0 })
     }
 
-    getTime = (millisecondsRaw: number) => {
+    createSnippet = time => () => {
+        const snippet = { time, date: new Date(Date.now()).toString() }
+
+        this.props.onSippet(snippet)
+    }
+
+    getTimeSample = (millisecondsRaw: number) => {
         const millisecondsModule = millisecondsRaw % 1000
         const totalSeconds = (millisecondsRaw - millisecondsModule) / 1000
 
@@ -49,23 +48,32 @@ class Stopwatch extends Component<{}, State> {
         return { minutes: min, seconds: sec, milliseconds: milli }
     }
 
-    render() {
-        const { minutes, seconds, milliseconds } = this.getTime(this.state.milliseconds)
-        const arrowDegree = 360 / 600 * ((seconds + minutes * 60) * 10 + milliseconds)
+    getFormatedTime = ({ minutes, seconds, milliseconds }) => `${minutes}:${seconds}.${milliseconds}`
 
-        const formatted = `${minutes}:${seconds}.${milliseconds}`
+    getArrowDegree = ({ minutes, seconds, milliseconds }) => 360 / 600 * ((seconds + minutes * 60) * 10 + milliseconds)
+
+    render() {
+        const time = this.getTimeSample(this.state.milliseconds)
+
+        const arrowDegree = this.getArrowDegree(time)
+        const formatted = this.getFormatedTime(time)
 
         return (
-            <div className="Stopwatch">
+            <div className={`Stopwatch ${this.props.visible ? '' : 'hidden'}`}>
                 <Circle time={formatted} degree={arrowDegree} />
 
                 <div className="Stopwatch__actions">
                     <Button onClick={this.start} text="start" />
                     <Button onClick={this.stop} text="stop" />
                     <Button onClick={this.clear} text="clear" />
+                    <Button onClick={this.createSnippet(time)} text="snippet" />
                 </div>
             </div>
         )
+    }
+
+    componentWillUnmount() {
+        this.clear()
     }
 }
 
