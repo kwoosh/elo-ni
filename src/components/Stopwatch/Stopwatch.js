@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Circle from '../Circle/Circle'
 import Button from '../Button/Button'
 import './Stopwatch.css'
+import dayjs from 'dayjs'
 
 class Stopwatch extends Component {
     state = {
@@ -31,8 +32,12 @@ class Stopwatch extends Component {
         this.setState({ milliseconds: 0 })
     }
 
-    createSnippet = time => () => {
-        const snippet = { time, date: new Date(Date.now()).toString() }
+    createSnippet = (time, massage) => () => {
+        const snippet = {
+            massage,
+            inHours: Number((time.mins / 60).toFixed(2)),
+            when: dayjs().format('DD MMMM in HH:mm:ss'),
+        }
 
         this.props.onSippet(snippet)
     }
@@ -41,16 +46,16 @@ class Stopwatch extends Component {
         const millisecondsModule = millisecondsRaw % 1000
         const totalSeconds = (millisecondsRaw - millisecondsModule) / 1000
 
-        const milli = millisecondsModule / 100
-        const sec = totalSeconds % 60
-        const min = (totalSeconds - totalSeconds % 60) / 60
+        const millis = millisecondsModule / 100
+        const secs = totalSeconds % 60
+        const mins = (totalSeconds - totalSeconds % 60) / 60
 
-        return { minutes: min, seconds: sec, milliseconds: milli }
+        return { mins, secs, millis }
     }
 
-    getFormatedTime = ({ minutes, seconds, milliseconds }) => `${minutes}:${seconds}.${milliseconds}`
+    getFormatedTime = ({ mins, secs, millis }) => `${mins}:${secs}.${millis}`
 
-    getArrowDegree = ({ minutes, seconds, milliseconds }) => 360 / 600 * ((seconds + minutes * 60) * 10 + milliseconds)
+    getArrowDegree = ({ mins, secs, millis }) => 360 / 600 * ((secs + mins * 60) * 10 + millis)
 
     render() {
         const time = this.getTimeSample(this.state.milliseconds)
