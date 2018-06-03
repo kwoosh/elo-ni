@@ -5,9 +5,10 @@
     height: 100%;
 }
 
-.Stopwatch__actions {
+.Stopwatch__actions,
+.Stopwatch__snippet-form {
     margin-top: 50px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
