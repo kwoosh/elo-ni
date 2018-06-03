@@ -12,6 +12,7 @@
     "test:renderer": "react-scripts test --env=jsdom"
   },
   "dependencies": {
+    "dayjs": "^1.6.5",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
   },
