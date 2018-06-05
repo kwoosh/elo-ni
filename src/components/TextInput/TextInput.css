@@ -1,0 +1,23 @@
+.Input {
+    margin: 6px 8px;
+    padding: 10px 15px;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 1.05em;
+    display: flex;
+    align-items: center;
+}
+
+.Input__field {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.05em;
+    color: #fff;
+}
+
+.Input__field::placeholder {
+    color: #fff;
+    opacity: 0.6;
+}
