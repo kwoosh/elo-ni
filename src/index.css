@@ -9,6 +9,10 @@ body {
 
 .App {
     height: inherit;
+    margin: 0 auto;
+    padding: 0px 25px;
+    width: 350px;
+    /* height: 100%; */
 }
 
 .App__tabs {
@@ -26,6 +30,11 @@ body {
 
 .App__tabs li:hover {
     cursor: pointer;
+}
+
+.Snippets {
+    list-style: none;
+    padding: 0;
 }
 
 .hidden {

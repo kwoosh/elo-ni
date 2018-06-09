@@ -1,14 +1,22 @@
 .Stopwatch {
-    margin: 0 auto;
-    padding: 40px 20px;
-    width: 350px;
-    height: 100%;
+    margin: 20px auto;
+    /* padding: 40px 25px; */
+    /* width: 350px; */
+    /* height: 100%; */
 }
 
 .Stopwatch__actions,
 .Stopwatch__snippet-form {
-    margin-top: 50px;
     display: flex;
     flex-direction: row;
+}
+
+.Stopwatch__actions {
+    margin-top: 50px;
+    justify-content: center;
+}
+
+.Stopwatch__snippet-form {
+    margin-top: 10px;
     justify-content: space-between;
 }
