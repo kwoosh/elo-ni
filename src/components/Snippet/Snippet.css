@@ -1,0 +1,29 @@
+.Snippet {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.Snippet__info {
+    display: flex;
+    align-items: center;
+}
+
+.Snippet__hours {
+    color: #fff;
+    font-weight: 100;
+    /* margin-left: 20px; */
+}
+
+.Snippet__when {
+    font-size: 0.5em;
+    text-align: right;
+    opacity: 0.7;
+}
+
+.Snippet__delete-icon {
+    border-right: 0.5px solid #fff;
+    padding-right: 8px;
+}
