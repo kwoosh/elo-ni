@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Icon from '../Icon/Icon'
 
@@ -14,5 +15,11 @@ const Button = ({ onClick, text, icon = '' }) => (
         )}
     </button>
 )
+
+Button.propTypes = {
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    icon: PropTypes.string,
+    onClick: PropTypes.func,
+}
 
 export default Button

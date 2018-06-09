@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import Icon from '../Icon/Icon'
 
@@ -34,6 +35,12 @@ class TextInput extends Component {
             </div>
         )
     }
+}
+
+TextInput.propTypes = {
+    placeholder: PropTypes.string,
+    onInput: PropTypes.func,
+    onChange: PropTypes.func,
 }
 
 export default TextInput

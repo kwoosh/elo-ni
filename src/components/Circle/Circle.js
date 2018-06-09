@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import './Circle.css'
 
@@ -11,6 +12,11 @@ const Circle = ({ time, degree }) => {
             <div className="Circle__center-text">{time}</div>
         </article>
     )
+}
+
+Circle.propTypes = {
+    time: PropTypes.string,
+    degree: PropTypes.number,
 }
 
 export default Circle

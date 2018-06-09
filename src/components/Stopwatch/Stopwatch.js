@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import dayjs from 'dayjs'
 
 import Button from '../Button/Button'
@@ -115,6 +116,12 @@ class Stopwatch extends Component {
     componentWillUnmount() {
         this.clear()
     }
+}
+
+Stopwatch.propTypes = {
+    visible: PropTypes.bool,
+    lastSnippetId: PropTypes.number,
+    onSippet: PropTypes.func,
 }
 
 export default Stopwatch

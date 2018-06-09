@@ -27,13 +27,18 @@ class App extends Component {
         this.setState(() => ({ snippets }))
     }
 
-    // componentWillMount() {
-    //     const snippets = JSON.parse(localStorage.getItem('snippets') || JSON.stringify([]))
-    // }
+    componentWillMount() {
+        const snippets = JSON.parse(localStorage.getItem('snippets') || JSON.stringify([]))
+        const screen = JSON.parse(localStorage.getItem('screen')) || ''
 
-    // componentDidUpdate() {
-    //     localStorage.setItem('snippets', JSON.stringify(this.state.snippets))
-    // }
+        this.setState(prev => ({ screen, snippets }))
+        console.log('lol', { screen, snippets })
+    }
+
+    componentDidUpdate() {
+        localStorage.setItem('snippets', JSON.stringify(this.state.snippets))
+        localStorage.setItem('screen', JSON.stringify(this.state.screen))
+    }
 
     render() {
         const Snippets = (

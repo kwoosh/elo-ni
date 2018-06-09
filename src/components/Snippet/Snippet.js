@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import Icon from '../Icon/Icon'
@@ -24,5 +25,15 @@ const Snippet = ({ snippet, onDelete }) => (
         <div className="Snippet__when">{snippet.when}</div>
     </div>
 )
+
+Snippet.propTypes = {
+    onDelete: PropTypes.func,
+    snippet: PropTypes.shape({
+        id: PropTypes.number,
+        inHours: PropTypes.number,
+        massage: PropTypes.string,
+        when: PropTypes.string,
+    }),
+}
 
 export default Snippet
