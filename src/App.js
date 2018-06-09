@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import Stopwatch from './components/Stopwatch/Stopwatch'
-import Snippets from './components/Snippets/Snippets'
+import Snippet from './components/Snippet/Snippet'
 
 class App extends Component {
     tabs = ['Stopwatch', 'Snippets']
@@ -11,18 +11,38 @@ class App extends Component {
         snippets: [],
     }
 
-    getLastSnippetId = arr => arr.reduce((prev, curr) => (curr > prev ? curr : prev), 0)
+    getLastSnippetId = () =>
+        this.state.snippets.map(({ id }) => id).reduce((prev, curr) => (curr > prev ? curr : prev), 0)
 
     toggleTab = tab => () => {
         this.setState(prev => ({ screen: tab.toLowerCase() }))
     }
 
-    handleSnippetCreation = snippet => {
+    handleCreateSnippet = snippet => {
         this.setState(({ snippets }) => ({ snippets: [...snippets, snippet] }))
     }
 
+    handleDeleteSnippet = id => {
+        const snippets = this.state.snippets.filter(snippet => snippet.id !== id)
+        this.setState(() => ({ snippets }))
+    }
+
+    // componentWillMount() {
+    //     const snippets = JSON.parse(localStorage.getItem('snippets') || JSON.stringify([]))
+    // }
+
+    // componentDidUpdate() {
+    //     localStorage.setItem('snippets', JSON.stringify(this.state.snippets))
+    // }
+
     render() {
-        const lastSnippetId = this.getLastSnippetId(this.state.snippets.map(({ id }) => id))
+        const Snippets = (
+            <ul className={`Snippets ${this.state.screen === 'snippets' ? '' : 'hidden'}`}>
+                {this.state.snippets.map(snippet => (
+                    <Snippet key={snippet.id} snippet={snippet} onDelete={this.handleDeleteSnippet} />
+                ))}
+            </ul>
+        )
 
         return (
             <div className="App">
@@ -34,11 +54,12 @@ class App extends Component {
                     ))}
                 </ul>
 
-                <Snippets visible={this.state.screen === 'snippets'} />
+                {Snippets}
+
                 <Stopwatch
                     visible={this.state.screen === 'stopwatch'}
-                    onSippet={this.handleSnippetCreation}
-                    lastSnippetId={lastSnippetId}
+                    onSippet={this.handleCreateSnippet}
+                    lastSnippetId={this.getLastSnippetId()}
                 />
             </div>
         )
