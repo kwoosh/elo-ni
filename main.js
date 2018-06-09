@@ -14,7 +14,7 @@ const loadURL = isDev
 app.on('ready', () => {
     let mainWindow = new BrowserWindow({
         width: 400,
-        height: 600,
+        height: 650,
     })
 
     mainWindow.loadURL(loadURL)
