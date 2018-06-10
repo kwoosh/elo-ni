@@ -5,12 +5,12 @@
   "homepage": "./",
   "main": "main/index.js",
   "scripts": {
-    "pack": "electron-builder --dir",
+    "package:app": "electron-builder --dir",
     "start": "cross-env NODE_ENV=development electron .",
-    "dev": "react-scripts start",
-    "build:renderer": "react-scripts build && node ./format-build-dir.js",
-    "test:renderer": "react-scripts test --env=jsdom",
-    "generate:icons": "electron-icon-maker --input=./main/icon.png --output=./main"
+    "dev:serve": "react-scripts start",
+    "build:r": "react-scripts build && node ./format-build-dir.js",
+    "test:r": "react-scripts test --env=jsdom",
+    "make:icons": "electron-icon-maker --input=./main/icon.png --output=./main"
   },
   "dependencies": {
     "dayjs": "^1.6.5",
