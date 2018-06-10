@@ -1,44 +1,52 @@
-const { app, BrowserWindow } = require('electron')
-const { ICON_PATH, REACT_DEVELOPER_TOOLS_PATH, dev, loadURL } = require('./app-configs/utils')
+const { app, BrowserWindow, Tray, Menu, MenuItem } = require('electron')
+const { ICON_PATH, REACT_DEVELOPER_TOOLS_PATH, dev, loadURL, defaultWindowOptions } = require('./app-configs/utils')
 
-let mainWindow
+let win = null
+let tray = null
 
 app.on('ready', () => {
-    const defaultWidth = 460
-    const defaultHeight = 650
-
-    const windowOptions = {
-        width: !dev ? defaultWidth : defaultWidth + 1000,
-        height: defaultHeight,
+    tray = new Tray(ICON_PATH)
+    win = new BrowserWindow({
+        ...defaultWindowOptions,
         icon: ICON_PATH,
         // frame: false,
-    }
+    })
 
-    if (!dev) {
-        windowOptions.minHeight = defaultHeight
-        windowOptions.maxHeight = defaultHeight
-        windowOptions.minWidth = defaultWidth
-        windowOptions.maxWidth = defaultWidth
-    }
+    // win.setSkipTaskbar(true)
 
-    mainWindow = new BrowserWindow(windowOptions)
+    const trayContextMenu = Menu.buildFromTemplate([
+        new MenuItem({
+            label: 'About elo-ni',
+            click() {
+                console.log('about')
+            },
+        }),
+        new MenuItem({ type: 'separator' }),
+        new MenuItem({ label: 'Quit app', role: 'quit' }),
+    ])
 
-    mainWindow.loadURL(loadURL)
-    mainWindow.on('closed', () => {
-        mainWindow = null
+    tray.on('double-click', () => {
+        win.isVisible() ? win.hide() : win.show()
+    })
+
+    tray.setContextMenu(trayContextMenu)
+    tray.setToolTip('Click to hide/show')
+    // tray.setHighlightMode('always')
+
+    win.loadURL(loadURL)
+    win.on('closed', () => {
+        win = null
         app.quit()
     })
 
     if (dev) {
         BrowserWindow.addDevToolsExtension(REACT_DEVELOPER_TOOLS_PATH)
-        mainWindow.webContents.openDevTools({ mode: 'right' })
-    }
-
-    if (!dev) {
-        // BrowserWindow.
+        win.webContents.openDevTools({ mode: 'right' })
     }
 })
 
 app.on('before-quit', () => {
-    mainWindow.webContents.send('before-quit')
+    win.webContents.send('before-quit')
+    tray.destroy()
+    tray = null
 })

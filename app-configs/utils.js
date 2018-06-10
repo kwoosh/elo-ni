@@ -14,7 +14,23 @@ const OPTIONS = {
         'C:\\Users\\38050\\AppData\\Roaming\\Opera Software\\Opera Stable\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\3.2.3_0',
 }
 
+const width = 460
+const height = 650
+
+const defaultWindowOptions = {
+    width: !isDev ? width : width + 1000,
+    height,
+}
+
+if (!isDev) {
+    defaultWindowOptions.minHeight = height
+    defaultWindowOptions.maxHeight = height
+    defaultWindowOptions.minWidth = width
+    defaultWindowOptions.maxWidth = width
+}
+
 exports.dev = isDev
 exports.loadURL = isDev ? OPTIONS.devURL : OPTIONS.buildURL
 exports.REACT_DEVELOPER_TOOLS_PATH = OPTIONS.reactDevToolsPath
 exports.ICON_PATH = path.join(__dirname, 'icon.png')
+exports.defaultWindowOptions = defaultWindowOptions
