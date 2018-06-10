@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import Stopwatch from './components/Stopwatch/Stopwatch'
 import Snippet from './components/Snippet/Snippet'
+import Icon from './components/Icon/Icon'
 
 class App extends Component {
     tabs = ['Stopwatch', 'Snippets']
@@ -50,6 +51,10 @@ class App extends Component {
 
         return (
             <div className="App">
+                <div className="App__draggable">
+                    <Icon name="drag" size="25px" />
+                </div>
+
                 <ul className="App__tabs">
                     {this.tabs.map((tab, i) => (
                         <li key={i} onClick={this.toggleTab(tab)}>

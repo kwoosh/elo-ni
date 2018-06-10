@@ -9,7 +9,7 @@ app.on('ready', () => {
     win = new BrowserWindow({
         ...defaultWindowOptions,
         icon: ICON_PATH,
-        // frame: false,
+        frame: false,
     })
 
     // win.setSkipTaskbar(true)

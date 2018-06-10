@@ -15,6 +15,16 @@ body {
     /* height: 100%; */
 }
 
+.App__draggable {
+    -webkit-app-region: drag;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    opacity: 0.7;
+    transition: all 0.5s;
+    z-index: 10;
+}
+
 .App__tabs {
     color: #fff;
     margin: 0;
