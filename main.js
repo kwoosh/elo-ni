@@ -1,31 +1,44 @@
 const { app, BrowserWindow } = require('electron')
-const path = require('path')
-const url = require('path')
+const { ICON_PATH, REACT_DEVELOPER_TOOLS_PATH, dev, loadURL } = require('./app-configs/utils')
 
-const isDev = process.env.NODE_ENV === 'development'
-const loadURL = isDev
-    ? 'http://localhost:3000'
-    : url.format({
-          pathname: path.join(__dirname, 'build/index.html'),
-          protocol: 'file:',
-          slashes: true,
-      })
+let mainWindow
 
 app.on('ready', () => {
-    let mainWindow = new BrowserWindow({
-        width: 400,
-        height: 650,
-    })
+    const defaultWidth = 460
+    const defaultHeight = 650
+
+    const windowOptions = {
+        width: !dev ? defaultWidth : defaultWidth + 1000,
+        height: defaultHeight,
+        icon: ICON_PATH,
+        // frame: false,
+    }
+
+    if (!dev) {
+        windowOptions.minHeight = defaultHeight
+        windowOptions.maxHeight = defaultHeight
+        windowOptions.minWidth = defaultWidth
+        windowOptions.maxWidth = defaultWidth
+    }
+
+    mainWindow = new BrowserWindow(windowOptions)
 
     mainWindow.loadURL(loadURL)
-
     mainWindow.on('closed', () => {
         mainWindow = null
         app.quit()
     })
 
-    if (isDev) BrowserWindow.addDevToolsExtension(REACT_DEVELOPER_TOOLS_PATH)
+    if (dev) {
+        BrowserWindow.addDevToolsExtension(REACT_DEVELOPER_TOOLS_PATH)
+        mainWindow.webContents.openDevTools({ mode: 'right' })
+    }
+
+    if (!dev) {
+        // BrowserWindow.
+    }
 })
 
-const REACT_DEVELOPER_TOOLS_PATH =
-    'C:\\Users\\38050\\AppData\\Roaming\\Opera Software\\Opera Stable\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi\\3.2.3_0'
+app.on('before-quit', () => {
+    mainWindow.webContents.send('before-quit')
+})
