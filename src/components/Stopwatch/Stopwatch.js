@@ -8,6 +8,8 @@ import TextInput from '../TextInput/TextInput'
 
 import './Stopwatch.css'
 
+const { ipcRenderer } = window.require('electron')
+
 class Stopwatch extends Component {
     state = {
         snippetMassage: '',
@@ -19,6 +21,10 @@ class Stopwatch extends Component {
         super(props)
 
         this.interval = null
+
+        ipcRenderer.on('before-quit', () => {
+            localStorage.setItem('time', this.state.milliseconds)
+        })
     }
 
     start = () => {
@@ -113,8 +119,14 @@ class Stopwatch extends Component {
         )
     }
 
+    componentWillMount() {
+        const time = localStorage.getItem('time')
+
+        if (time) this.setState(prev => ({ milliseconds: JSON.parse(time) }))
+    }
+
     componentWillUnmount() {
-        this.clear()
+        this.stop()
     }
 }
 
