@@ -7,6 +7,11 @@ body {
     background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
 }
 
+#root {
+    height: 100vh;
+    margin-top: 40px;
+}
+
 .App {
     height: inherit;
     margin: 0 auto;
@@ -15,14 +20,22 @@ body {
     /* height: 100%; */
 }
 
-.App__draggable {
+.App__drag-icon {
     -webkit-app-region: drag;
     position: fixed;
     top: 10px;
-    right: 10px;
-    opacity: 0.7;
-    transition: all 0.5s;
+    left: 10px;
+    opacity: 1;
     z-index: 10;
+}
+
+.App__close-icon {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    opacity: 1;
+    z-index: 10;
+    cursor: pointer;
 }
 
 .App__tabs {

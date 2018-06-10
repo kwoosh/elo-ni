@@ -4,12 +4,18 @@ import Stopwatch from './components/Stopwatch/Stopwatch'
 import Snippet from './components/Snippet/Snippet'
 import Icon from './components/Icon/Icon'
 
+const { ipcRenderer } = window.require('electron')
+
 class App extends Component {
     tabs = ['Stopwatch', 'Snippets']
 
     state = {
         screen: 'stopwatch',
         snippets: [],
+    }
+
+    quitApp() {
+        ipcRenderer.send('quit-app')
     }
 
     getLastSnippetId = () =>
@@ -51,8 +57,12 @@ class App extends Component {
 
         return (
             <div className="App">
-                <div className="App__draggable">
-                    <Icon name="drag" size="25px" />
+                <div className="App__drag-icon">
+                    <Icon name="drag" size="30px" />
+                </div>
+
+                <div className="App__close-icon">
+                    <Icon name="close-app" size="30px" onClick={this.quitApp} />
                 </div>
 
                 <ul className="App__tabs">
