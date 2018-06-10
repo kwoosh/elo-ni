@@ -1,13 +1,15 @@
 const { app, BrowserWindow, Tray, Menu, MenuItem, ipcMain } = require('electron')
-const { ICON_PATH, REACT_DEVELOPER_TOOLS_PATH, dev, loadURL, windowSizes } = require('./app-configs/utils')
+const { ICON_PATH, REACT_DEVELOPER_TOOLS_PATH, dev, loadURL, WINDOW_SIZE } = require('./utils')
 
 let win = null
 let tray = null
 
+console.log(loadURL)
+
 app.on('ready', () => {
     tray = new Tray(ICON_PATH)
     win = new BrowserWindow({
-        ...windowSizes,
+        ...WINDOW_SIZE,
         icon: ICON_PATH,
         frame: false,
         resizable: dev,
@@ -42,7 +44,7 @@ app.on('ready', () => {
     if (dev) {
         BrowserWindow.addDevToolsExtension(REACT_DEVELOPER_TOOLS_PATH)
         win.webContents.openDevTools({ mode: 'right' })
-        win.setSize(windowSizes.width + 1000, windowSizes.height)
+        win.setSize(WINDOW_SIZE.width + 1000, WINDOW_SIZE.height)
         win.setPosition(250, 200)
     }
 })
