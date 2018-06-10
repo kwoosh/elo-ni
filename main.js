@@ -1,5 +1,5 @@
-const { app, BrowserWindow, Tray, Menu, MenuItem } = require('electron')
-const { ICON_PATH, REACT_DEVELOPER_TOOLS_PATH, dev, loadURL, defaultWindowOptions } = require('./app-configs/utils')
+const { app, BrowserWindow, Tray, Menu, MenuItem, ipcMain } = require('electron')
+const { ICON_PATH, REACT_DEVELOPER_TOOLS_PATH, dev, loadURL, windowSizes } = require('./app-configs/utils')
 
 let win = null
 let tray = null
@@ -7,9 +7,10 @@ let tray = null
 app.on('ready', () => {
     tray = new Tray(ICON_PATH)
     win = new BrowserWindow({
-        ...defaultWindowOptions,
+        ...windowSizes,
         icon: ICON_PATH,
         frame: false,
+        resizable: dev,
     })
 
     // win.setSkipTaskbar(true)
@@ -35,13 +36,14 @@ app.on('ready', () => {
 
     win.loadURL(loadURL)
     win.on('closed', () => {
-        win = null
         app.quit()
     })
 
     if (dev) {
         BrowserWindow.addDevToolsExtension(REACT_DEVELOPER_TOOLS_PATH)
         win.webContents.openDevTools({ mode: 'right' })
+        win.setSize(windowSizes.width + 1000, windowSizes.height)
+        win.setPosition(250, 200)
     }
 })
 
@@ -49,4 +51,9 @@ app.on('before-quit', () => {
     win.webContents.send('before-quit')
     tray.destroy()
     tray = null
+    win = null
+})
+
+ipcMain.on('quit-app', () => {
+    app.quit()
 })
