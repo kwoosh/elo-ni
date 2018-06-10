@@ -8,7 +8,7 @@
     "dev": "react-scripts start",
     "start": "cross-env NODE_ENV=development electron .",
     "build:renderer": "react-scripts build",
-    "generate:icons": "electron-icon-maker --input=./public/assets/app-icon.png --output=./public/assets",
+    "generate:icons": "electron-icon-maker --input=./app-configs/icon.png --output=./app-configs",
     "test:renderer": "react-scripts test --env=jsdom"
   },
   "dependencies": {
