@@ -32,7 +32,6 @@ class App extends Component {
         const screen = JSON.parse(localStorage.getItem('screen')) || ''
 
         this.setState(prev => ({ screen, snippets }))
-        console.log('lol', { screen, snippets })
     }
 
     componentDidUpdate() {
