@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 class Icon extends Component {
     handleClick = e => {
-        this.props.onClick(e)
+        if (this.props.onClick) this.props.onClick(e)
     }
 
     render() {
