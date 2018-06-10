@@ -8,7 +8,9 @@
 
 # production
 /build
+/dist
 /release-builds
+/main/icons
 
 # other
 .trash
