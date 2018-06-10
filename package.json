@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
-  "main": "./main.js",
+  "main": "main/index.js",
   "scripts": {
-    "dev": "react-scripts start",
+    "pack": "electron-builder --dir",
     "start": "cross-env NODE_ENV=development electron .",
-    "build:renderer": "react-scripts build",
-    "generate:icons": "electron-icon-maker --input=./app-configs/icon.png --output=./app-configs",
-    "test:renderer": "react-scripts test --env=jsdom"
+    "dev": "react-scripts start",
+    "build:renderer": "react-scripts build && node ./format-build-dir.js",
+    "test:renderer": "react-scripts test --env=jsdom",
+    "generate:icons": "electron-icon-maker --input=./main/icon.png --output=./main"
   },
   "dependencies": {
     "dayjs": "^1.6.5",
@@ -21,11 +22,19 @@
   "devDependencies": {
     "cross-env": "^5.1.5",
     "electron": "^2.0.1",
+    "electron-builder": "^20.15.1",
     "electron-icon-maker": "0.0.4",
     "flow-bin": "^0.73.0",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "fs-extra": "6.0.1"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "build": {
+    "extends": null,
+    "appId": "com.elo.ni",
+    "productName": "Elo ni",
+    "files": ["build/**/*", "main/**/*"]
   }
 }
